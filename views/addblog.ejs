@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="icon" href="/loginstf/img/favicon.png" type="image/png" />
+  <title>Create post</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/loginstf/css/bootstrap.css" />
+  <link rel="stylesheet" href="/loginstf/vendors/linericon/style.css" />
+  <link rel="stylesheet" href="/loginstf/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/loginstf/css/themify-icons.css" />
+  <link rel="stylesheet" href="/loginstf/css/flaticon.css" />
+  <link rel="stylesheet" href="/loginstf/vendors/owl-carousel/owl.carousel.min.css" />
+  <link rel="stylesheet" href="/loginstf/vendors/lightbox/simpleLightbox.css" />
+  <link rel="stylesheet" href="/loginstf/vendors/nice-select/css/nice-select.css" />
+  <link rel="stylesheet" href="/loginstf/vendors/animate-css/animate.css" />
+  <link rel="stylesheet" href="/loginstf/vendors/jquery-ui/jquery-ui.css" />
+  <!-- main css -->
+  <link rel="stylesheet" href="/loginstf/css/style.css" />
+  <link rel="stylesheet" href="/loginstf/css/responsive.css" />
+</head>
+<body>
+        <% include ./shared/navbar %>
+        <div class="container">
+                <div class="col mx-5 my-4">
+        
+                    <h4 class="widget_title">Add a post</h4>
+                    <% include ./partials/messages %>
+                    <form action="/home/createpost/" method="POST" enctype="multipart/form-data">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Title of your blog" required>
+                        </div>
+        
+                        <div class="form-group col-md-6">
+                                <textarea class="form-control" placeholder="Please type the description here..."  name="description" id="description" required></textarea>
+                        </div>   
+                        
+                        <div class="form-group col-md-6">
+                            <select class="form-control" id="type" name= "type">
+                                <option>Science & Technology</option>
+                                <option>Travel</option>
+                                <option>Food</option>
+                                <option>Funny</option>
+                                <option>Daily life</option>
+                                <option>Others</option>
+                            </select>     
+                        </div>
+                        <div class="form-group col-md-6">
+                                <label for="postimg">Image related to Your post</label>
+                                <input type="file" class="form-control-file" id="postimg" accept="image/*" name="postimg" required>
+                              </div>
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="btn submit_btn">Submit</button>
+                        </div>
+                    </form>
+        
+                </div>
+        
+            </div>
+            
+</body>
+</html>

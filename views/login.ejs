@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="icon" href="/loginstf/img/favicon.png" type="image/png" />
+  <title>Login</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/loginstf/css/bootstrap.css" />
+  <link rel="stylesheet" href="/loginstf/vendors/linericon/style.css" />
+  <link rel="stylesheet" href="/loginstf/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/loginstf/css/themify-icons.css" />
+  <link rel="stylesheet" href="/loginstf/css/flaticon.css" />
+  <link rel="stylesheet" href="/loginstf/vendors/owl-carousel/owl.carousel.min.css" />
+  <link rel="stylesheet" href="/loginstf/vendors/lightbox/simpleLightbox.css" />
+  <link rel="stylesheet" href="/loginstf/vendors/nice-select/css/nice-select.css" />
+  <link rel="stylesheet" href="/loginstf/vendors/animate-css/animate.css" />
+  <link rel="stylesheet" href="/loginstf/vendors/jquery-ui/jquery-ui.css" />
+  <!-- main css -->
+  <link rel="stylesheet" href="/loginstf/css/style.css" />
+  <link rel="stylesheet" href="/loginstf/css/responsive.css" />
+</head>
+<body>
+    <% include ./shared/navbar %>
+    <div class="container">
+            <div class="col mx-5 my-4">
+
+            <h4 class="widget_title">Login</h4>
+            <% include ./partials/messages %>
+            <form action="/users/login" method="POST">
+              <div class="form-group col-md-6">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+              </div>
+              <div class="form-group col-md-6">
+                    <input type="password" class="form-control" placeholder="password" id="password" name="password" required>
+                  </div>
+              <div class="col-md-12 form-group">
+                    <button type="submit" value="submit" class="btn submit_btn">Login</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+        
+    <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="/loginstf/js/jquery-3.2.1.min.js"></script>
+  <script src="/loginstf/js/popper.js"></script>
+  <script src="/loginstf/js/bootstrap.min.js"></script>
+  <script src="/loginstf/js/stellar.js"></script>
+  <script src="/loginstf/vendors/lightbox/simpleLightbox.min.js"></script>
+  <script src="/loginstf/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+  <script src="/loginstf/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+  <script src="/loginstf/vendors/isotope/isotope-min.js"></script>
+  <script src="/loginstf/vendors/owl-carousel/owl.carousel.min.js"></script>
+  <script src="/loginstf/js/jquery.ajaxchimp.min.js' %}"></script>
+  <script src="/loginstf/vendors/counter-up/jquery.waypoints.min.js"></script>
+  <script src="/loginstf/vendors/counter-up/jquery.counterup.js"></script>
+  <script src="/loginstf/js/mail-script.js"></script>
+  <script src="/loginstf/js/theme.js"></script>
+</body>
+</html>
