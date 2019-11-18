@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="icon" href="/loginstf/img/favicon.png" type="image/png" />
-  <title>Create post</title>
+  <title>Edit post</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="/loginstf/css/bootstrap.css" />
   <link rel="stylesheet" href="/loginstf/vendors/linericon/style.css" />
@@ -28,18 +28,45 @@
         
                     <h4 class="widget_title">Add a post</h4>
                     <% include ./partials/messages %>
-                    <form action="/home/createpost/" method="POST" enctype="multipart/form-data">
-                    
+                    <form action="/home/edit/<%=rposts.id %>" method="POST" enctype="multipart/form-data">
+                        <div style="display: none;">
+                            Updating on : <input type="date" id="updated_on" name="updated_on" >
+
+                            <script>
+                                function setInputDate(_id){
+                                    var _dat = document.querySelector(_id);
+                                    var hoy = new Date(),
+                                        d = hoy.getDate(),
+                                        m = hoy.getMonth()+1, 
+                                        y = hoy.getFullYear(),
+                                        data;
+
+                                    if(d < 10){
+                                        d = "0"+d;
+                                    };
+                                    if(m < 10){
+                                        m = "0"+m;
+                                    };
+
+                                    data = y+"-"+m+"-"+d;
+                                    console.log(data);
+                                    _dat.value = data;
+                                };
+
+                                setInputDate("#updated_on");
+                                </script>
+                            </div>
                         <div class="form-group col-md-6">
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Title of your blog" required>
+                            <input type="text" class="form-control" id="title" name="title" value="<%=rposts.title %>" placeholder="Title of your blog" >
                         </div>
         
                         <div class="form-group col-md-6">
-                                <textarea class="form-control" placeholder="Please type the description here..."  name="description" id="description" required></textarea>
+                                <textarea class="form-control" placeholder="Please type the description here..." name="description" id="description" ><%=rposts.description %></textarea>
                         </div>   
                         
                         <div class="form-group col-md-6">
-                            <select class="form-control" id="type" name= "type">
+                            <select class="form-control" id="type" name= "type" value="" >
+                                    <option><%=rposts.type %></option>
                                 <option>Science & Technology</option>
                                 <option>Travel</option>
                                 <option>Food</option>
@@ -50,7 +77,8 @@
                         </div>
                         <div class="form-group col-md-6">
                                 <label for="postimg">Image related to Your post</label>
-                                <input type="file" class="form-control-file" id="postimg" accept="image/*" name="postimg" required>
+                                <img class="card-img rounded-0" src="<%= rposts.postimg %>" alt="">
+                                <input type="file" class="form-control-file" id="postimg" accept="image/*" name="postimg" >
                               </div>
                         <div class="col-md-12 form-group">
                             <button type="submit" value="submit" class="btn submit_btn">Submit</button>

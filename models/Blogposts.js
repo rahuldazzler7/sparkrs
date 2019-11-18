@@ -28,9 +28,11 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'user',
         required: true
-    }]
-    
-
+    }],
+    updated_on : {
+        type: Date,
+        default: Date.now
+    }
 });
 const blogpost = mongoose.model('blogpost',UserSchema);
 module.exports = blogpost;

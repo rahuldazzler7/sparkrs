@@ -76,7 +76,71 @@ else{
 }
 });
 
-router.patch('/home/')
+router.get('/home/edit/:id',ensureAuthenticated,(req,res)=>{
+    blogpost.findById(req.params.id, (err,ptos)=>{
+        if(err){
+           console.log(err);
+            
+        }
+        if(ptos.author == req.user.fullname || req.user.isadmin){
+            res.render('editpost',{rposts: ptos});
+        }
+        else{
+            req.flash('error_msg', 'You are not authorized');
+            res.redirect('/home')
+        }
+        
+    })
+
+});
+
+router.post('/home/edit/:id',ensureAuthenticated, upload,(req,res)=>{
+    cloudinary.uploader.upload(req.file.path, { folder:"sparkpost/posts" },(err, result)=>{
+        if (err) {
+            console.log(err);
+        }
+        else{
+            var postimgurl = result.secure_url;
+                var postimgu = postimgurl;     
+                //console.log(result);
+
+                const updateddata ={
+                    title: req.body.title,
+                    description: req.body.description,
+                    type: req.body.type,
+                    postimg : postimgu,
+                    updated_on: req.body.updated_on,
+                }
+            
+                blogpost.findByIdAndUpdate(req.params.id, updateddata, (err)=>{
+                    if(err){
+                        console.log(err);
+                        res.redirect('/home/edit/'+req.params.id);
+                    }
+                    else{
+                        res.redirect('/home');
+                    }
+                } );
+        }
+
+    });
+
+
+});
+
+router.get('/home/:id', ensureAuthenticated, (req,res)=>{
+    blogpost.findOneAndDelete(req.params.id, (err,users)=>{
+        if(err){
+            res.redirect('/home');
+        }
+        else{
+
+            res.redirect('/home');
+        }
+    });
+
+});
+
 
 router.post('/home/createpost/',ensureAuthenticated, upload ,(req,res)=>{
 
