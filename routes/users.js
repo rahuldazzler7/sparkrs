@@ -6,10 +6,6 @@ const User = require('../models/User');
 
 const router = express.Router();
 
-
-router.get('/login', (req,res)=>res.render('login'));
-router.get('/register', (req,res)=>res.render('register'));
-
 router.post('/register', (req, res)=>{
     const { fullname, email, username, password, password2 } = req.body;
     let errors = [];
@@ -68,7 +64,7 @@ router.post('/register', (req, res)=>{
                     newUser.save()
                     .then(reguser =>{
                         req.flash(`success_msg`,`You are now registered and you're ready to login`);
-                    res.redirect('/users/login');
+                    res.redirect('/login');
                     })
                     .catch(err=>console.log(err));
                 } ))
@@ -81,19 +77,3 @@ router.post('/register', (req, res)=>{
 
 module.exports = router;
 
-router.post(`/login`,(req,res,next)=>{
-    passport.authenticate('useru',{
-        successRedirect: '/home',
-        failureRedirect: '/users/login',
-        failureFlash: true
-      })(req, res, next);
-});
-
-
-router.get('/logout', (req, res) => {
-    req.logout();
-    req.flash('success_msg', 'You are logged out');
-    req.session.destroy();
-    res.redirect('/');
-    
-  });

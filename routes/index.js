@@ -6,6 +6,7 @@ const path = require('path');
 const blogpost = require('../models/Blogposts');
 const User = require('../models/User');
 const cloudinary = require('cloudinary').v2;
+const passport = require('passport');
 
 cloudinary.config({
     cloud_name: 'dz05jrtvq',
@@ -49,6 +50,9 @@ function checkfiletype(file, cb){
 }
 //res.render('addblog')
 
+router.get('/login', (req,res)=>res.render('login'));
+router.get('/register', (req,res)=>res.render('register'));
+
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 router.get('/', (req,res)=>res.render('index'));
 router.get('/home/createpost', ensureAuthenticated, (req,res)=>{
@@ -76,7 +80,7 @@ else{
 }
 });
 
-router.get('/home/edit/:id',ensureAuthenticated,(req,res)=>{
+router.get('/edit/:id',ensureAuthenticated,(req,res)=>{
     blogpost.findById(req.params.id, (err,ptos)=>{
         if(err){
            console.log(err);
@@ -94,7 +98,7 @@ router.get('/home/edit/:id',ensureAuthenticated,(req,res)=>{
 
 });
 
-router.post('/home/edit/:id',ensureAuthenticated, upload,(req,res)=>{
+router.post('/edit/:id',ensureAuthenticated, upload,(req,res)=>{
     cloudinary.uploader.upload(req.file.path, { folder:"sparkpost/posts" },(err, result)=>{
         if (err) {
             console.log(err);
@@ -128,8 +132,8 @@ router.post('/home/edit/:id',ensureAuthenticated, upload,(req,res)=>{
 
 });
 
-router.get('/home/:id', ensureAuthenticated, (req,res)=>{
-    blogpost.findOneAndDelete(req.params.id, (err,users)=>{
+router.get('/delete/:id', ensureAuthenticated, (req,res)=>{
+    blogpost.findByIdAndDelete(req.params.id, (err,users)=>{
         if(err){
             res.redirect('/home');
         }
@@ -199,8 +203,21 @@ router.post('/home/createpost/',ensureAuthenticated, upload ,(req,res)=>{
   
 });
 
-
-
-
-
 module.exports = router;
+
+router.post(`/login`,(req,res,next)=>{
+    passport.authenticate('useru',{
+        successRedirect: '/home',
+        failureRedirect: '/login',
+        failureFlash: true
+      })(req, res, next);
+});
+
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'You are logged out');
+    req.session.destroy();
+    res.redirect('/');
+    
+  });
